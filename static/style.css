@@ -1,0 +1,980 @@
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+
+    margin: 0;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background:
+        #f4f6f8;
+
+    color:
+        #222;
+}
+
+
+.container {
+
+    width: 92%;
+
+    max-width: 1100px;
+
+    margin:
+        40px auto;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.header {
+
+    text-align:
+        center;
+
+    margin-bottom:
+        30px;
+}
+
+
+.header h1 {
+
+    font-size:
+        36px;
+
+    margin-bottom:
+        8px;
+}
+
+
+.header p {
+
+    color:
+        #666;
+
+    font-size:
+        17px;
+}
+
+
+/* =========================================================
+   CARD
+   ========================================================= */
+
+.card {
+
+    background:
+        #ffffff;
+
+    padding:
+        30px;
+
+    border-radius:
+        14px;
+
+    margin-bottom:
+        25px;
+
+    box-shadow:
+        0 4px 18px
+        rgba(
+            0,
+            0,
+            0,
+            0.08
+        );
+}
+
+
+/* =========================================================
+   DESCRIPTION
+   ========================================================= */
+
+.description {
+
+    color:
+        #666;
+
+    line-height:
+        1.6;
+}
+
+
+/* =========================================================
+   ERRORS
+   ========================================================= */
+
+.error {
+
+    background:
+        #ffe3e3;
+
+    color:
+        #990000;
+
+    padding:
+        13px;
+
+    border-radius:
+        8px;
+
+    margin:
+        15px 0;
+}
+
+
+/* =========================================================
+   UPLOAD
+   ========================================================= */
+
+.upload-box {
+
+    border:
+        2px dashed
+        #aaa;
+
+    border-radius:
+        12px;
+
+    padding:
+        35px;
+
+    text-align:
+        center;
+
+    margin:
+        25px 0;
+
+    background:
+        #fafafa;
+}
+
+
+.upload-box input {
+
+    display:
+        none;
+}
+
+
+.upload-box label {
+
+    display:
+        inline-block;
+
+    padding:
+        13px 25px;
+
+    border-radius:
+        8px;
+
+    background:
+        #222;
+
+    color:
+        #fff;
+
+    cursor:
+        pointer;
+}
+
+
+#file-name {
+
+    color:
+        #777;
+
+    margin-top:
+        15px;
+}
+
+
+/* =========================================================
+   BUTTON
+   ========================================================= */
+
+.check-button {
+
+    width:
+        100%;
+
+    padding:
+        15px;
+
+    border:
+        none;
+
+    border-radius:
+        8px;
+
+    background:
+        #111;
+
+    color:
+        white;
+
+    font-size:
+        16px;
+
+    cursor:
+        pointer;
+}
+
+
+.check-button:hover {
+
+    opacity:
+        0.85;
+}
+
+
+.check-button:disabled {
+
+    opacity:
+        0.6;
+
+    cursor:
+        not-allowed;
+}
+
+
+/* =========================================================
+   SUPPORTED
+   ========================================================= */
+
+.supported {
+
+    text-align:
+        center;
+
+    color:
+        #777;
+
+    font-size:
+        14px;
+}
+
+
+/* =========================================================
+   LOADING
+   ========================================================= */
+
+.loading {
+
+    display:
+        none;
+
+    text-align:
+        center;
+}
+
+
+.loader {
+
+    width:
+        45px;
+
+    height:
+        45px;
+
+    border:
+        5px solid
+        #ddd;
+
+    border-top:
+        5px solid
+        #222;
+
+    border-radius:
+        50%;
+
+    animation:
+        spin
+        1s linear infinite;
+
+    margin:
+        0 auto 15px;
+}
+
+
+@keyframes spin {
+
+    from {
+
+        transform:
+            rotate(0deg);
+    }
+
+
+    to {
+
+        transform:
+            rotate(360deg);
+    }
+
+}
+
+
+/* =========================================================
+   RESULT SUMMARY
+   ========================================================= */
+
+.summary-grid {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:
+        25px;
+
+    margin-bottom:
+        25px;
+}
+
+
+.score-box,
+.unique-box {
+
+    padding:
+        25px;
+
+    text-align:
+        center;
+
+    border-radius:
+        12px;
+
+    background:
+        #fafafa;
+}
+
+
+.score {
+
+    font-size:
+        65px;
+
+    font-weight:
+        bold;
+}
+
+
+.unique-score {
+
+    font-size:
+        65px;
+
+    font-weight:
+        bold;
+}
+
+
+.score-label {
+
+    color:
+        #666;
+
+    margin-top:
+        8px;
+}
+
+
+/* =========================================================
+   BREAKDOWN
+   ========================================================= */
+
+.breakdown {
+
+    margin:
+        20px 0;
+}
+
+
+.breakdown-item {
+
+    display:
+        flex;
+
+    justify-content:
+        space-between;
+
+    margin-top:
+        12px;
+
+    font-weight:
+        bold;
+}
+
+
+.bar {
+
+    height:
+        10px;
+
+    background:
+        #e3e3e3;
+
+    border-radius:
+        8px;
+
+    margin-top:
+        7px;
+
+    overflow:
+        hidden;
+}
+
+
+.bar-fill {
+
+    height:
+        100%;
+
+    border-radius:
+        8px;
+}
+
+
+.exact-fill {
+
+    background:
+        #e74c4c;
+}
+
+
+.partial-fill {
+
+    background:
+        #f1aa21;
+}
+
+
+/* =========================================================
+   STATISTICS
+   ========================================================= */
+
+.statistics {
+
+    display:
+        grid;
+
+    gap:
+        10px;
+
+    margin-top:
+        25px;
+}
+
+
+.stat {
+
+    display:
+        flex;
+
+    justify-content:
+        space-between;
+
+    gap:
+        20px;
+
+    padding:
+        13px;
+
+    background:
+        #f6f6f6;
+
+    border-radius:
+        8px;
+}
+
+
+.stat span {
+
+    color:
+        #666;
+}
+
+
+.stat strong {
+
+    text-align:
+        right;
+
+    word-break:
+        break-word;
+}
+
+
+/* =========================================================
+   INFO
+   ========================================================= */
+
+.info-box {
+
+    margin-top:
+        25px;
+
+    padding:
+        18px;
+
+    background:
+        #f1f5f9;
+
+    border-radius:
+        8px;
+
+    line-height:
+        1.6;
+}
+
+
+.formula {
+
+    margin-top:
+        12px;
+
+    padding:
+        13px;
+
+    background:
+        #ffffff;
+
+    text-align:
+        center;
+
+    font-weight:
+        bold;
+
+    border-radius:
+        8px;
+}
+
+
+/* =========================================================
+   SOURCE BREAKDOWN
+   ========================================================= */
+
+.source-card {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        16px;
+
+    padding:
+        16px;
+
+    border:
+        1px solid
+        #ddd;
+
+    border-radius:
+        10px;
+
+    margin-top:
+        12px;
+}
+
+
+.source-rank {
+
+    width:
+        35px;
+
+    height:
+        35px;
+
+    flex-shrink:
+        0;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    border-radius:
+        50%;
+
+    background:
+        #eee;
+
+    font-weight:
+        bold;
+}
+
+
+.source-info {
+
+    flex:
+        1;
+}
+
+
+.source-info a {
+
+    color:
+        #222;
+
+    font-weight:
+        bold;
+
+    text-decoration:
+        none;
+}
+
+
+.source-info a:hover {
+
+    text-decoration:
+        underline;
+}
+
+
+.source-info p {
+
+    margin:
+        8px 0;
+
+    color:
+        #666;
+
+    font-size:
+        14px;
+}
+
+
+.source-info span {
+
+    display:
+        block;
+
+    color:
+        #888;
+
+    font-size:
+        12px;
+
+    word-break:
+        break-all;
+}
+
+
+.source-percent {
+
+    font-size:
+        18px;
+
+    font-weight:
+        bold;
+}
+
+
+/* =========================================================
+   MATCHES
+   ========================================================= */
+
+.match-card {
+
+    padding:
+        20px;
+
+    border:
+        1px solid
+        #ddd;
+
+    border-radius:
+        10px;
+
+    margin-top:
+        18px;
+}
+
+
+.match-header {
+
+    display:
+        flex;
+
+    justify-content:
+        space-between;
+
+    align-items:
+        center;
+
+    font-size:
+        18px;
+
+    margin-bottom:
+        8px;
+}
+
+
+.match-type {
+
+    display:
+        inline-block;
+
+    padding:
+        6px 10px;
+
+    border-radius:
+        20px;
+
+    background:
+        #f1f1f1;
+
+    font-size:
+        12px;
+
+    font-weight:
+        bold;
+
+    margin-bottom:
+        12px;
+}
+
+
+.metrics {
+
+    display:
+        flex;
+
+    flex-wrap:
+        wrap;
+
+    gap:
+        8px;
+
+    margin-bottom:
+        15px;
+}
+
+
+.metrics span {
+
+    padding:
+        6px 10px;
+
+    border-radius:
+        20px;
+
+    background:
+        #f5f5f5;
+
+    font-size:
+        13px;
+}
+
+
+.text-box {
+
+    padding:
+        16px;
+
+    border-radius:
+        8px;
+
+    margin-bottom:
+        14px;
+
+    line-height:
+        1.6;
+}
+
+
+.text-box h3 {
+
+    margin-top:
+        0;
+
+    font-size:
+        15px;
+}
+
+
+.uploaded {
+
+    background:
+        #eef4ff;
+}
+
+
+.source-content {
+
+    background:
+        #f7f7f7;
+}
+
+
+.source-link {
+
+    line-height:
+        1.7;
+}
+
+
+.source-link a {
+
+    color:
+        #222;
+
+    font-weight:
+        bold;
+}
+
+
+.source-link span {
+
+    color:
+        #777;
+
+    font-size:
+        12px;
+
+    word-break:
+        break-all;
+}
+
+
+/* =========================================================
+   NO MATCH
+   ========================================================= */
+
+.no-match {
+
+    padding:
+        30px;
+
+    text-align:
+        center;
+
+    background:
+        #f7f7f7;
+
+    border-radius:
+        10px;
+}
+
+
+/* =========================================================
+   DISCLAIMER
+   ========================================================= */
+
+.disclaimer {
+
+    background:
+        #fff8e1;
+
+    line-height:
+        1.6;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.footer {
+
+    text-align:
+        center;
+
+    color:
+        #777;
+
+    padding:
+        20px;
+
+    font-size:
+        14px;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    .container {
+
+        width:
+            95%;
+    }
+
+
+    .card {
+
+        padding:
+            20px;
+    }
+
+
+    .header h1 {
+
+        font-size:
+            28px;
+    }
+
+
+    .summary-grid {
+
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .score,
+    .unique-score {
+
+        font-size:
+            52px;
+    }
+
+
+    .stat {
+
+        flex-direction:
+            column;
+
+        gap:
+            5px;
+    }
+
+
+    .stat strong {
+
+        text-align:
+            left;
+    }
+
+
+    .source-card {
+
+        align-items:
+            flex-start;
+
+        flex-wrap:
+            wrap;
+    }
+
+}
