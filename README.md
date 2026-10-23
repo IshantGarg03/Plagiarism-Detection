@@ -2,6 +2,14 @@
 
 ### 🚀 AI-Powered Text Similarity Screening Using Python, NLP & Web Search
 
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3.10%2B-blue?logo=python&logoColor=white" alt="Python">
+  <img src="https://img.shields.io/badge/Flask-Web%20Framework-black?logo=flask" alt="Flask">
+  <img src="https://img.shields.io/badge/NLP-Text%20Analysis-purple" alt="NLP">
+  <img src="https://img.shields.io/badge/API-Tavily-00A67D" alt="Tavily API">
+  <img src="https://img.shields.io/badge/Interface-HTML%20%7C%20CSS%20%7C%20JS-orange" alt="Frontend">
+</p>
+
 ---
 
 ## 🌟 Overview
