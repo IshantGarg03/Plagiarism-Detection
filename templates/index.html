@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Automated Plagiarism Detection
+    </title>
+
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
+
+    <header class="header">
+
+        <h1>
+            Automated Plagiarism Detection
+        </h1>
+
+
+        <p>
+            Similarity Analysis Using NLP & Web Search
+        </p>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         UPLOAD
+         ===================================================== -->
+
+    <section class="card">
+
+
+        <h2>
+            Upload One Document
+        </h2>
+
+
+        <p class="description">
+
+            Upload one PDF, DOCX or TXT file.
+            The system automatically searches
+            public web sources and analyzes
+            matching passages.
+
+        </p>
+
+
+        {% with messages =
+            get_flashed_messages()
+        %}
+
+
+            {% if messages %}
+
+
+                {% for message in messages %}
+
+
+                    <div class="error">
+
+                        {{ message }}
+
+                    </div>
+
+
+                {% endfor %}
+
+
+            {% endif %}
+
+
+        {% endwith %}
+
+
+
+        <form
+            id="upload-form"
+            method="POST"
+            enctype="multipart/form-data"
+        >
+
+
+            <div class="upload-box">
+
+
+                <input
+                    type="file"
+                    name="document"
+                    id="document"
+                    accept=".pdf,.docx,.txt"
+                    required
+                >
+
+
+                <label
+                    for="document"
+                >
+
+                    📄 Choose Document
+
+                </label>
+
+
+                <p id="file-name">
+
+                    No file selected
+
+                </p>
+
+
+            </div>
+
+
+
+            <button
+                id="check-button"
+                type="submit"
+                class="check-button"
+            >
+
+                🔍 Check Plagiarism
+
+            </button>
+
+
+        </form>
+
+
+        <p class="supported">
+
+            Supported:
+            PDF • DOCX • TXT
+
+            <br>
+
+            Maximum size:
+            10 MB
+
+        </p>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         LOADING
+         ===================================================== -->
+
+    <section
+        id="loading"
+        class="card loading"
+    >
+
+
+        <div class="loader"></div>
+
+
+        <h3>
+            Analyzing your document...
+        </h3>
+
+
+        <p>
+
+            Searching public sources and
+            analyzing matching passages.
+
+        </p>
+
+
+    </section>
+
+
+
+    {% if result %}
+
+
+    <!-- =====================================================
+         SUMMARY
+         ===================================================== -->
+
+    <section class="card">
+
+
+        <h2>
+            Analysis Result
+        </h2>
+
+
+
+        <div class="summary-grid">
+
+
+            <!-- =================================================
+                 PLAGIARISM
+                 ================================================= -->
+
+            <div class="score-box">
+
+
+                <div class="score">
+
+                    {{ result.plagiarism_percentage }}%
+
+                </div>
+
+
+                <div class="score-label">
+
+                    Estimated Plagiarism
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 UNIQUE
+                 ================================================= -->
+
+            <div class="unique-box">
+
+
+                <div class="unique-score">
+
+                    {{ result.unique_percentage }}%
+
+                </div>
+
+
+                <div class="score-label">
+
+                    Unique Content
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =====================================================
+             MATCH TYPE BREAKDOWN
+             ===================================================== -->
+
+        <div class="breakdown">
+
+
+            <div class="breakdown-item exact">
+
+                <span>
+                    Exact Match
+                </span>
+
+
+                <strong>
+
+                    {{ result.exact_percentage }}%
+
+                </strong>
+
+            </div>
+
+
+
+            <div class="bar">
+
+                <div
+                    class="bar-fill exact-fill"
+                    style="width: {{ result.exact_percentage }}%"
+                ></div>
+
+            </div>
+
+
+
+            <div class="breakdown-item partial">
+
+                <span>
+                    Partial Match
+                </span>
+
+
+                <strong>
+
+                    {{ result.partial_percentage }}%
+
+                </strong>
+
+            </div>
+
+
+
+            <div class="bar">
+
+                <div
+                    class="bar-fill partial-fill"
+                    style="width: {{ result.partial_percentage }}%"
+                ></div>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =====================================================
+             STATISTICS
+             ===================================================== -->
+
+        <div class="statistics">
+
+
+            <div class="stat">
+
+                <span>
+                    File
+                </span>
+
+                <strong>
+                    {{ result.filename }}
+                </strong>
+
+            </div>
+
+
+            <div class="stat">
+
+                <span>
+                    Total Words
+                </span>
+
+                <strong>
+                    {{ result.total_words }}
+                </strong>
+
+            </div>
+
+
+            <div class="stat">
+
+                <span>
+                    Matched Words
+                </span>
+
+                <strong>
+                    {{ result.matched_words }}
+                </strong>
+
+            </div>
+
+
+            <div class="stat">
+
+                <span>
+                    Exact Words
+                </span>
+
+                <strong>
+                    {{ result.exact_words }}
+                </strong>
+
+            </div>
+
+
+            <div class="stat">
+
+                <span>
+                    Partial Words
+                </span>
+
+                <strong>
+                    {{ result.partial_words }}
+                </strong>
+
+            </div>
+
+
+            <div class="stat">
+
+                <span>
+                    Sources Found
+                </span>
+
+                <strong>
+                    {{ result.source_count }}
+                </strong>
+
+            </div>
+
+
+            <div class="stat">
+
+                <span>
+                    Web Queries
+                </span>
+
+                <strong>
+                    {{ result.search_count }}
+                </strong>
+
+            </div>
+
+
+            <div class="stat">
+
+                <span>
+                    Sentences Checked
+                </span>
+
+                <strong>
+                    {{ result.sentences_checked }}
+                </strong>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =====================================================
+             FORMULA
+             ===================================================== -->
+
+        <div class="info-box">
+
+
+            <strong>
+                Similarity Calculation
+            </strong>
+
+
+            <p>
+
+                The percentage is based on the
+                number of submitted words that are
+                covered by detected exact or partial
+                matching passages.
+
+            </p>
+
+
+            <div class="formula">
+
+                Matched Words ÷ Total Words × 100
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         SOURCE BREAKDOWN
+         ===================================================== -->
+
+    <section class="card">
+
+
+        <h2>
+            Source Breakdown
+        </h2>
+
+
+        {% if result.sources %}
+
+
+            {% for source in result.sources %}
+
+
+            <div class="source-card">
+
+
+                <div class="source-rank">
+
+                    {{ loop.index }}
+
+                </div>
+
+
+                <div class="source-info">
+
+
+                    <a
+                        href="{{ source.url }}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+
+                        {{ source.title }}
+
+                    </a>
+
+
+                    <p>
+
+                        {{ source.matched_words }}
+                        matched words
+
+                        •
+
+                        {{ source.matches }}
+                        passage(s)
+
+                    </p>
+
+
+                    <span>
+
+                        {{ source.url }}
+
+                    </span>
+
+
+                </div>
+
+
+                <div class="source-percent">
+
+                    {{ source.percentage }}%
+
+                </div>
+
+
+            </div>
+
+
+            {% endfor %}
+
+
+        {% else %}
+
+
+            <div class="no-match">
+
+                No matching sources were identified.
+
+            </div>
+
+
+        {% endif %}
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         MATCHING CONTENT
+         ===================================================== -->
+
+    <section class="card">
+
+
+        <h2>
+            Detected Matching Content
+        </h2>
+
+
+        {% if result.matches %}
+
+
+            {% for match in result.matches %}
+
+
+            <article class="match-card">
+
+
+                <div class="match-header">
+
+
+                    <span>
+
+                        Match {{ loop.index }}
+
+                    </span>
+
+
+                    <strong>
+
+                        {{ match.coverage }}%
+
+                    </strong>
+
+
+                </div>
+
+
+
+                <div class="match-type">
+
+
+                    {% if match.type == "exact" %}
+
+                        EXACT MATCH
+
+                    {% else %}
+
+                        PARTIAL MATCH
+
+                    {% endif %}
+
+
+                </div>
+
+
+
+                <div class="metrics">
+
+
+                    <span>
+
+                        TF-IDF:
+                        {{ match.tfidf }}%
+
+                    </span>
+
+
+                    <span>
+
+                        Sequence:
+                        {{ match.sequence }}%
+
+                    </span>
+
+
+                    <span>
+
+                        Matched Words:
+                        {{ match.matched_words }}
+
+                    </span>
+
+
+                </div>
+
+
+
+                <!-- Uploaded -->
+
+                <div class="text-box uploaded">
+
+
+                    <h3>
+                        Uploaded Content
+                    </h3>
+
+
+                    <p>
+
+                        {{ match.submitted_sentence }}
+
+                    </p>
+
+
+                </div>
+
+
+
+                <!-- Source -->
+
+                <div class="text-box source-content">
+
+
+                    <h3>
+                        Matching Source Content
+                    </h3>
+
+
+                    <p>
+
+                        {{ match.reference_sentence }}
+
+                    </p>
+
+
+                </div>
+
+
+
+                <!-- URL -->
+
+                <div class="source-link">
+
+
+                    <strong>
+                        Source:
+                    </strong>
+
+
+                    <a
+                        href="{{ match.url }}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+
+                        {{ match.title }}
+
+                    </a>
+
+
+                    <br>
+
+
+                    <span>
+
+                        {{ match.url }}
+
+                    </span>
+
+
+                </div>
+
+
+            </article>
+
+
+            {% endfor %}
+
+
+        {% else %}
+
+
+            <div class="no-match">
+
+
+                <h3>
+                    No strong matching passages detected
+                </h3>
+
+
+                <p>
+
+                    The retrieved public web sources
+                    did not contain sufficient matching
+                    evidence.
+
+                </p>
+
+
+            </div>
+
+
+        {% endif %}
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         DISCLAIMER
+         ===================================================== -->
+
+    <section class="card disclaimer">
+
+
+        <strong>
+            Important:
+        </strong>
+
+
+        <p>
+
+            This is an automated web-based similarity
+            screening system. It does not have access
+            to private university repositories,
+            subscription-only publications, or
+            proprietary plagiarism databases.
+
+            Different plagiarism services can therefore
+            produce different similarity percentages for
+            the same document.
+
+        </p>
+
+
+    </section>
+
+
+    {% endif %}
+
+
+
+    <footer class="footer">
+
+        Automated Plagiarism Detection and
+        Similarity Analysis
+
+    </footer>
+
+
+</div>
+
+
+
+<script
+    src="{{ url_for('static', filename='script.js') }}"
+></script>
+
+
+</body>
+
+</html>
